@@ -52,33 +52,32 @@ class HomePage extends StatelessWidget {
 
   Row CategoryImage() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: CircleAvatar(
-                backgroundImage: CachedNetworkImageProvider(
-                    'https://picsum.photos/id/1/200/300'
-                ),
-                radius: 50,
+            CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(
+                  'https://picsum.photos/id/1/200/300'
               ),
+              radius: 40,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: CircleAvatar(
-                backgroundImage: CachedNetworkImageProvider(
-                    'https://picsum.photos/id/1/200/300'
-                ),
-                radius: 50,
+            CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(
+                  'https://picsum.photos/id/1/200/300'
               ),
+              radius: 40,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: CircleAvatar(
-                backgroundImage: CachedNetworkImageProvider(
-                    'https://picsum.photos/id/1/200/300'
-                ),
-                radius: 50,
+            CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(
+                  'https://picsum.photos/id/1/200/300'
               ),
+              radius: 40,
+            ),
+            CircleAvatar(
+              backgroundImage: CachedNetworkImageProvider(
+                  'https://picsum.photos/id/1/200/300'
+              ),
+              radius: 40,
             ),
           ],
         );

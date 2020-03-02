@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:theham/screens/My_Page.dart';
 import 'package:theham/screens/home_page.dart';
 
 class MainPage extends StatefulWidget{
@@ -14,7 +15,7 @@ class _MainPageState extends State<MainPage> {
     HomePage(),
     Container(color: Colors.primaries[1],),
     Container(color: Colors.primaries[2],),
-    Container(color: Colors.primaries[3],),
+    MyPage(),
   ];
 
 

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:theham/constants/size.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -19,12 +20,12 @@ class HomePage extends StatelessWidget {
               children: <Widget>[
                 _AdImage(),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(common_gap),
                   child: Text('카테고리',),
                 ),
                 CategoryImage(),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(common_gap),
                   child: Text('그들의 이야기'),
                 ),
                 StoryImage()

@@ -29,11 +29,24 @@ class _MyPageState extends State<MyPage> {
 
   Widget _sideMenu() {
     return AnimatedContainer(
+      width: menuWidth,
       curve: Curves.easeInOut,
       color: Colors.green,
       duration: Duration(milliseconds: duration),
       transform: Matrix4.translationValues(
           _sideMenuOpened ? _size.width - menuWidth : _size.width, 0, 0),
+      child: SafeArea(
+        child: SizedBox(
+          width: menuWidth,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              FlatButton(child: Text('Log-out', style: TextStyle(fontSize: 20),), onPressed: null,)
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -47,29 +60,33 @@ class _MyPageState extends State<MyPage> {
       child: SafeArea(
         child: Column(
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                Expanded(child: Padding(
-                  padding: const EdgeInsets.only(left: common_gap),
-                  child: Text('마이페이지', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                )),
-                IconButton(
-                    onPressed: null,
-                    icon: ImageIcon(AssetImage('assets/cart2.png'),
-                        color: Colors.green)),
-                IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _sideMenuOpened = !_sideMenuOpened;
-                      });
-                    },
-                    icon: Icon(Icons.menu), color: Colors.green)
-              ],
-            )
+            _titleSideMenu(),
           ],
         ),
       )
     ,
     );
+  }
+
+  Row _titleSideMenu() {
+    return Row(
+            children: <Widget>[
+              Expanded(child: Padding(
+                padding: const EdgeInsets.only(left: common_gap),
+                child: Text('마이페이지', style: TextStyle(fontSize: 20),),
+              )),
+              IconButton(
+                  onPressed: null,
+                  icon: ImageIcon(AssetImage('assets/cart2.png'),
+                      color: Colors.green)),
+              IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _sideMenuOpened = !_sideMenuOpened;
+                    });
+                  },
+                  icon: Icon(Icons.menu), color: Colors.green)
+            ],
+          );
   }
 }

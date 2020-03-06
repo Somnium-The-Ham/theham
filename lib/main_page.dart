@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:theham/screens/My_Page.dart';
 import 'package:theham/screens/home_page.dart';
+import 'package:theham/screens/pick_page.dart';
 
 class MainPage extends StatefulWidget{
   @override
@@ -14,7 +15,7 @@ class _MainPageState extends State<MainPage> {
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     Container(color: Colors.primaries[1],),
-    Container(color: Colors.primaries[2],),
+    PickPage(),
     MyPage(),
   ];
 

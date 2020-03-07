@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:theham/constants/size.dart';
 import 'package:theham/main_page.dart';
@@ -84,8 +85,7 @@ class _SignUpFormState extends State<SignUpForm> {
               FlatButton(
                 onPressed: () {
                   if (_formkey.currentState.validate()) {
-                    final route = MaterialPageRoute(builder: (context) => MainPage());
-                    Navigator.pushReplacement(context, route);
+                    _register;
                   }
                 },
                 child: Text(
@@ -116,6 +116,19 @@ class _SignUpFormState extends State<SignUpForm> {
         ),
       ),
     );
+  }
+
+  get _register async {
+    final AuthResult result = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailConstroller.text, password: _pwConstroller.text);
+
+    final FirebaseUser user = result.user;
+
+    if (user == null){
+      final snackbar = SnackBar(content: Text('Please try again later!'),);
+      Scaffold.of(context).showSnackBar(snackbar);
+    }else{
+      Navigator.pop(context);
+    }
   }
 
 

@@ -49,11 +49,11 @@ class _AuthPageState extends State<AuthPage> {
           textAlign: TextAlign.center,
           text: TextSpan(style: const TextStyle(), children: <TextSpan>[
             TextSpan(
-                text: (currentWidget is SignUpForm)? "더함에 계정을 가지고 있지 않으신가요" : "이미 계정을 가지고 계신가요??",
+                text: (currentWidget is LogInForm)? "더함에 계정을 가지고 있지 않으신가요" : "이미 계정을 가지고 계신가요??",
                 style: TextStyle(
                     fontWeight: FontWeight.w300, color: Colors.black54)),
             TextSpan(
-                text: (currentWidget is SignUpForm)? "회원가입" : "로그인",
+                text: (currentWidget is LogInForm)? "회원가입" : "로그인",
                 style: TextStyle(
                     fontWeight: FontWeight.w300, color: Colors.green)),
           ]),

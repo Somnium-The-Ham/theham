@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:theham/widget/login_form.dart';
+import 'package:theham/widget/sign_up_form.dart';
 
-class LogInPage extends StatefulWidget {
+class AuthPage extends StatefulWidget {
   @override
-  _LogInPageState createState() => _LogInPageState();
+  _AuthPageState createState() => _AuthPageState();
 }
 
-class _LogInPageState extends State<LogInPage> {
+class _AuthPageState extends State<AuthPage> {
+
+  Widget currentWidget = LogInForm();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +18,9 @@ class _LogInPageState extends State<LogInPage> {
       body: SafeArea(
         child: Stack(
           children: <Widget>[
-            LogInForm(),
+            AnimatedSwitcher(
+                duration: Duration(milliseconds: 300),
+                child: currentWidget),
             _goToSignUpPageBtn(context),
           ],
         ),
@@ -30,16 +36,24 @@ class _LogInPageState extends State<LogInPage> {
       height: 40,
       child: FlatButton(
         shape: Border(top: BorderSide(color: Colors.grey[300])),
-        onPressed: null,
+        onPressed: (){
+          setState(() {
+            if(currentWidget is LogInForm) {
+              currentWidget = SignUpForm();
+            }else{
+                currentWidget = LogInForm();
+            }
+          });
+        },
         child: RichText(
           textAlign: TextAlign.center,
           text: TextSpan(style: const TextStyle(), children: <TextSpan>[
             TextSpan(
-                text: '더함에 계정이 없으신가요?',
+                text: (currentWidget is SignUpForm)? "더함에 계정을 가지고 있지 않으신가요" : "이미 계정을 가지고 계신가요??",
                 style: TextStyle(
                     fontWeight: FontWeight.w300, color: Colors.black54)),
             TextSpan(
-                text: '  회원가입',
+                text: (currentWidget is SignUpForm)? "회원가입" : "로그인",
                 style: TextStyle(
                     fontWeight: FontWeight.w300, color: Colors.green)),
           ]),

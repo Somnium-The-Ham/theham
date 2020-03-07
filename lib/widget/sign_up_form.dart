@@ -3,20 +3,22 @@ import 'package:theham/constants/size.dart';
 import 'package:theham/main_page.dart';
 import 'package:theham/utils/simple_snack_bar.dart';
 
-class LogInForm extends StatefulWidget {
+class SignUpForm extends StatefulWidget {
   @override
-  _LogInFormState createState() => _LogInFormState();
+  _SignUpFormState createState() => _SignUpFormState();
 }
 
-class _LogInFormState extends State<LogInForm> {
+class _SignUpFormState extends State<SignUpForm> {
 
   GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   TextEditingController _emailConstroller = TextEditingController();
   TextEditingController _pwConstroller = TextEditingController();
+  TextEditingController _cpwConstroller = TextEditingController();
 
   void dispose() {
     _emailConstroller.dispose();
     _pwConstroller.dispose();
+    _cpwConstroller.dispose();
     super.dispose();
   }
 
@@ -66,12 +68,16 @@ class _LogInFormState extends State<LogInForm> {
               Spacer(
                 flex: 1,
               ),
-              Text(
-                "비밀번호를 잊어버렸나요??",
-                textAlign: TextAlign.end,
-                style: TextStyle(
-                  color: Colors.green, fontWeight: FontWeight.w600),
-                ),
+              TextFormField(
+                controller: _cpwConstroller,
+                decoration:getTextFieldDecor('Confirm Password'),
+                validator: (String value) {
+                  if (value.isEmpty || value != _pwConstroller.text) {
+                    return '비밀번호를 한번 더 확인해주세요!!';
+                  }
+                  return null;
+                },
+              ),
               Spacer(
                 flex: 2,
               ),
@@ -83,7 +89,7 @@ class _LogInFormState extends State<LogInForm> {
                   }
                 },
                 child: Text(
-                  "Log-in",
+                  "회원 가입",
                   style: TextStyle(color: Colors.white),
                 ),
                 color: Colors.green,

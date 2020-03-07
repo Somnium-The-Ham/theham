@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:theham/constants/size.dart';
+import 'package:theham/screens/auth_page.dart';
 
 class MyPage extends StatefulWidget {
   @override
@@ -42,7 +43,18 @@ class _MyPageState extends State<MyPage> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              FlatButton(child: Text('Log-out', style: TextStyle(fontSize: 20),), onPressed: null,)
+              FlatButton.icon(
+                onPressed: () {
+                  final route = MaterialPageRoute(builder: (context) => AuthPage());
+                  Navigator.pushReplacement(context, route);
+                },
+              icon: Icon(Icons.exit_to_app, color: Colors.white,),
+              label: Text(
+                'Log out',
+                style: TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.w500
+                ),
+              ),)
             ],
           ),
         ),

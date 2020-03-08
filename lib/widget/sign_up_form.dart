@@ -10,7 +10,6 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
-
   GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   TextEditingController _emailConstroller = TextEditingController();
   TextEditingController _pwConstroller = TextEditingController();
@@ -45,7 +44,7 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
               TextFormField(
                 controller: _emailConstroller,
-                decoration:getTextFieldDecor('E-mail'),
+                decoration: getTextFieldDecor('E-mail'),
                 validator: (String value) {
                   if (value.isEmpty || !value.contains("@")) {
                     return '아이디를 확인해주세요!!';
@@ -58,7 +57,7 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
               TextFormField(
                 controller: _pwConstroller,
-                decoration:getTextFieldDecor('Password'),
+                decoration: getTextFieldDecor('Password'),
                 validator: (String value) {
                   if (value.isEmpty) {
                     return '비밀번호를 확인해주세요!!';
@@ -71,7 +70,7 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
               TextFormField(
                 controller: _cpwConstroller,
-                decoration:getTextFieldDecor('Confirm Password'),
+                decoration: getTextFieldDecor('Confirm Password'),
                 validator: (String value) {
                   if (value.isEmpty || value != _pwConstroller.text) {
                     return '비밀번호를 한번 더 확인해주세요!!';
@@ -102,9 +101,9 @@ class _SignUpFormState extends State<SignUpForm> {
                 flex: 2,
               ),
               FlatButton.icon(
-                textColor: Colors.blue,
+                  textColor: Colors.blue,
                   onPressed: () {
-                  simpleSnackBar(context, 'testing');
+                    simpleSnackBar(context, 'testing');
                   },
                   icon: ImageIcon(AssetImage("assets_insta/icon/facebook.png")),
                   label: Text("Login with Facebook")),
@@ -119,37 +118,35 @@ class _SignUpFormState extends State<SignUpForm> {
   }
 
   get _register async {
-    final AuthResult result = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailConstroller.text, password: _pwConstroller.text);
+    final AuthResult result = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
+            email: _emailConstroller.text, password: _pwConstroller.text);
 
     final FirebaseUser user = result.user;
 
-    if (user == null){
-      final snackbar = SnackBar(content: Text('Please try again later!'),);
+    if (user == null) {
+      final snackbar = SnackBar(
+        content: Text('Please try again later!'),
+      );
       Scaffold.of(context).showSnackBar(snackbar);
-    }else{
-      Navigator.pop(context);
     }
   }
-
-
 
   InputDecoration getTextFieldDecor(String hint) {
     return InputDecoration(
       hintText: hint,
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: Colors.green,
-          width: 1,
-        ),
-        borderRadius: BorderRadius.circular(5)
-      ),
+          borderSide: BorderSide(
+            color: Colors.green,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(5)),
       focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: Colors.green,
             width: 1,
           ),
-          borderRadius: BorderRadius.circular(5)
-      ),
+          borderRadius: BorderRadius.circular(5)),
       focusColor: Colors.grey[100],
       filled: true,
     );

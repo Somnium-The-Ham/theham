@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:theham/constants/size.dart';
 import 'package:theham/screens/auth_page.dart';
@@ -45,8 +46,7 @@ class _MyPageState extends State<MyPage> {
             children: <Widget>[
               FlatButton.icon(
                 onPressed: () {
-                  final route = MaterialPageRoute(builder: (context) => AuthPage());
-                  Navigator.pushReplacement(context, route);
+                  FirebaseAuth.instance.signOut();
                 },
               icon: Icon(Icons.exit_to_app, color: Colors.white,),
               label: Text(

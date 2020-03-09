@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:theham/constants/size.dart';
+import 'package:theham/firebase/firestore_provider.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -9,7 +10,13 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Image.asset('assets/theham_logo.png', height: 20,),
         actions: <Widget>[
-          IconButton(onPressed: null ,icon: ImageIcon(AssetImage('assets/cart2.png'), color: Colors.green))
+          IconButton(
+              onPressed: () {
+                firestoreProvider.sendData().then((_) {
+                  print('data sent to firestore!');
+                });
+              },
+              icon: ImageIcon(AssetImage('assets/cart2.png'), color: Colors.green))
         ],
       ),
       body: ListView.builder(

@@ -18,7 +18,7 @@ class Theham extends StatelessWidget{
           if(snapshot.hasData) {
             return MainPage();
           }
-          return AuthPage();
+          return MainPage(); //AuthPage original
         }
       ),
       theme: ThemeData(

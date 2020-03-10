@@ -11,11 +11,7 @@ class HomePage extends StatelessWidget {
         title: Image.asset('assets/theham_logo.png', height: 20,),
         actions: <Widget>[
           IconButton(
-              onPressed: () {
-                firestoreProvider.sendData().then((_) {
-                  print('data sent to firestore!');
-                });
-              },
+              onPressed: (){},
               icon: ImageIcon(AssetImage('assets/cart2.png'), color: Colors.green))
         ],
       ),

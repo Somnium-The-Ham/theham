@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:theham/constants/size.dart';
 import 'package:theham/main_page.dart';
@@ -54,6 +55,7 @@ class _LogInFormState extends State<LogInForm> {
                 flex: 1,
               ),
               TextFormField(
+                obscureText: true,
                 controller: _pwConstroller,
                 decoration:getTextFieldDecor('Password'),
                 validator: (String value) {
@@ -78,8 +80,7 @@ class _LogInFormState extends State<LogInForm> {
               FlatButton(
                 onPressed: () {
                   if (_formkey.currentState.validate()) {
-                    final route = MaterialPageRoute(builder: (context) => MainPage());
-                    Navigator.pushReplacement(context, route);
+                    _login;
                   }
                 },
                 child: Text(
@@ -110,6 +111,15 @@ class _LogInFormState extends State<LogInForm> {
         ),
       ),
     );
+  }
+  get _login async{
+    final AuthResult result = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailConstroller.text, password: _pwConstroller.text);
+
+    final FirebaseUser user = result.user;
+
+    if (user == null) {
+      simpleSnackBar((context), "try again.");
+    }
   }
 
 

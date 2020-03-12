@@ -9,4 +9,5 @@ class Transformer{
       sink.add(User.fromSnapshot(snapshot));
     }
   );
+
 }

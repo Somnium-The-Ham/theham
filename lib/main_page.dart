@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:theham/screens/my_Page.dart';
+import 'package:theham/screens/my_page.dart';
 import 'package:theham/screens/home_page.dart';
 import 'package:theham/screens/pick_page.dart';
 

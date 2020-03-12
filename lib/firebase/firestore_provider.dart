@@ -13,7 +13,7 @@ class FirestoreProvider with Transformer {
     return _fireStore.runTransaction((Transaction tx) async {
       DocumentSnapshot snapshot = await tx.get(userRef);
       if (snapshot.exists) {
-        return;
+        await tx.update(userRef, snapshot.data);
       } else {
         await tx.set(userRef, User.getMapForCreateUser(email));
       }
@@ -28,6 +28,8 @@ class FirestoreProvider with Transformer {
         .snapshots()
         .transform(toUser);
   }
+
+
 
 //  Future<void> sendData() {
 //    return Firestore.instance

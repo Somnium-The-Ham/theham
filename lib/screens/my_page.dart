@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:theham/constants/size.dart';
+import 'package:theham/data/provider/my_user_data.dart';
 import 'package:theham/screens/app_opinion_page.dart';
 import 'package:theham/screens/auth_page.dart';
 import 'package:theham/screens/delivery_page.dart';
@@ -49,6 +51,7 @@ class _MyPageState extends State<MyPage> {
             children: <Widget>[
               FlatButton.icon(
                 onPressed: () {
+                  Provider.of<MyUserData>(context, listen: false).clearUser();
                   FirebaseAuth.instance.signOut();
                 },
                 icon: Icon(
@@ -123,40 +126,40 @@ class _MyPageState extends State<MyPage> {
 
   Padding _tabWidget() {
     return Padding(
-              padding: const EdgeInsets.symmetric(vertical: common_gap),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Table(
-                      children: [
-                        TableRow(children: [
-                          _getTabWidgetName('사회공헌 지수'),
-                          _getTabWidgetName('지난 구매 내역'),
-                        ]),
-                        TableRow(children: [
-                          RichText(
-                              textAlign: TextAlign.center,
-                              text: TextSpan(
-                                  style: const TextStyle(),
-                                  children: <TextSpan>[
-                                    _getTabWidgetNum('123'),
-                                    _getTabWidgetUnit("    Points"),
-                                  ])),
-                          RichText(
-                              textAlign: TextAlign.center,
-                              text: TextSpan(
-                                  style: const TextStyle(),
-                                  children: <TextSpan>[
-                                    _getTabWidgetNum('22'),
-                                    _getTabWidgetUnit("    건"),
-                                  ])),
-                        ]),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            );
+      padding: const EdgeInsets.symmetric(vertical: common_gap),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Table(
+              children: [
+                TableRow(children: [
+                  _getTabWidgetName('사회공헌 지수'),
+                  _getTabWidgetName('지난 구매 내역'),
+                ]),
+                TableRow(children: [
+                  RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                          style: const TextStyle(),
+                          children: <TextSpan>[
+                            _getTabWidgetNum('123'),
+                            _getTabWidgetUnit("    Points"),
+                          ])),
+                  RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                          style: const TextStyle(),
+                          children: <TextSpan>[
+                            _getTabWidgetNum('22'),
+                            _getTabWidgetUnit("    건"),
+                          ])),
+                ]),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Text _getTabWidgetName(String value) => Text(
@@ -186,20 +189,23 @@ class _MyPageState extends State<MyPage> {
   Padding _nickName() {
     return Padding(
       padding: const EdgeInsets.only(left: common_gap),
-      child: RichText(
-          textAlign: TextAlign.left,
-          text: TextSpan(style: const TextStyle(), children: <TextSpan>[
-            TextSpan(
-                text: "nickname",
+      child: Row(
+        children: <Widget>[
+          Consumer<MyUserData>(
+            builder: (context, myUserData, child){
+              return Text(
+            myUserData.data.username.toString(),
+            style: TextStyle(color: Colors.green),
+          );}),
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Text('   환영합니다.',
                 style: TextStyle(
-                    fontSize: 23,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.green)),
-            TextSpan(
-                text: "  님 환영합니다.",
-                style: TextStyle(
-                    fontWeight: FontWeight.w300, color: Colors.black54)),
-          ])),
+                  fontSize: 15,
+                )),
+          )
+        ],
+      ),
     );
   }
 
